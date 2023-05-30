@@ -1,0 +1,109 @@
+@use 'config/reset';
+@use 'config/variaveis';
+@use 'sass:math';
+
+@function convertePixelParaEm($alvoEmPixel, $contextoEmPixel: 16px){
+    @return math.div($alvoEmPixel, $contextoEmPixel)+em;
+}
+
+body {
+    background-color: variaveis.$corPrincipal;
+
+    li {
+        list-style: none;
+    }
+}
+
+.container {
+    max-width: convertePixelParaEm(1024px);
+    width: 100%;
+    margin: 0 auto;
+}
+
+header {
+    background-color: variaveis.$corHeader;
+    position: sticky;
+    top: 0;
+    left: 0;
+
+    .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: covertePixelParaEm(16px) 0;
+    }
+}
+
+.menu {
+    display: flex;
+
+    li {
+        font-weight: bold;
+        margin-left: covertePixelParaEm(24px);
+    }
+
+    a {
+        color: variaveis.$corSecundaria;
+        text-decoration: none;
+    }
+}
+
+section {
+    padding: 56px 0;
+
+    .products {
+        margin-top: convertePixelParaEm(40px);
+        display: grid;
+        grid-template-columns: repeat(3, 32.66%);
+        column-gap: 1%;
+        row-gap: 4%;
+        width: 100%;
+    }
+
+    .product-item {
+        img {
+            width: 100%;
+            border-radius: covertePixelParaEm(16px);
+        }
+    
+        .product-button {
+            display: block;
+            background-color: variaveis.$corBotao;
+            color: variaveis.$corSecundaria;
+            text-align: center;
+            padding: covertePixelParaEm(8px) 0;
+            border-radius: covertePixelParaEm(8px);
+            margin-top: covertePixelParaEm(8px);
+            text-decoration: none;
+    
+            &:hover {
+                background-color: darken(variaveis.$corButtonSecundaria, 30%) ;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: variaveis.$tablet) {
+    .container {
+        max-width: 80%;
+    }
+
+    .products {
+        grid-template-columns: repeat(2, 48.5%);
+        column-gap: 3%;
+    }
+}
+
+@media screen and (max-width: variaveis.$mobile) {
+
+    .container {
+
+        .products {
+            display: block;
+
+            .product-item  {
+                margin-bottom: covertePixelParaEm(32px);
+            }
+        }
+    }
+}
